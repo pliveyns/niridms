@@ -46,14 +46,14 @@ done
 
 echo "::endgroup::"
 
-#echo "::group:: Finalise Flatpak sources"
-#
-## The Fedora Flatpak remote must never be added on first boot.
-#systemctl disable flatpak-add-fedora-repos.service
-#systemctl mask flatpak-add-fedora-repos.service
-#rm -f "${CLEAN_ROOT}/usr/lib/systemd/system/flatpak-add-fedora-repos.service"
-#
-#echo "::endgroup::"
+echo "::group:: Finalise Flatpak sources"
+
+# The Fedora Flatpak remote must never be added on first boot.
+systemctl disable flatpak-add-fedora-repos.service
+systemctl mask flatpak-add-fedora-repos.service
+rm -f "${CLEAN_ROOT}/usr/lib/systemd/system/flatpak-add-fedora-repos.service"
+
+echo "::endgroup::"
 
 echo "::group:: Finalise automatic updates"
 
