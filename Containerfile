@@ -79,6 +79,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
 
 # Set dnf options before build scripts (persists across subsequent RUN layers)
 RUN dnf5 install -y 'dnf5-command(config-manager)' \
+    && dnf5 install -y rsync \
     && cp /etc/dnf/dnf.conf /etc/dnf/dnf.conf.tmp \
     && mv /etc/dnf/dnf.conf.tmp /etc/dnf/dnf.conf \
     && dnf5 config-manager setopt keepcache=1 install_weak_deps=0
