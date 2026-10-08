@@ -39,7 +39,7 @@ dnf5 install -y \
   rsms-inter-fonts \
   rsms-inter-vf-fonts \
   xdg-desktop-portal-gnome \
-  xdg-portal-desktop-gtk
+  xdg-desktop-portal-gtk
 
 echo "Niri desktop installed successfully"
 echo "::endgroup::"
