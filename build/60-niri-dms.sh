@@ -23,8 +23,7 @@ copr_install_isolated "avengemedia/danklinux" \
   dgop \
   danksearch \
   dms-greeter \
-  matugen \
-  quickshell-git
+  matugen
 
 dnf5 install -y \
   libwayland-server \
