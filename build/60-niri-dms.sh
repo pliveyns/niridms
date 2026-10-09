@@ -15,7 +15,7 @@ shopt -s nullglob
 echo "::group:: Install Niri Desktop with DMS"
 
 # Install Niri and DMS and recommended extras.
-copr_install_isolated "avengemedia/danklinux" \
+copr_install_isolated "avengemedia/dms" \
   dms niri
 
 copr_install_isolated "avengemedia/danklinux" \
@@ -24,7 +24,7 @@ copr_install_isolated "avengemedia/danklinux" \
   danksearch \
   dms-greeter \
   matugen \
-  quickshell
+  quickshell-git
 
 dnf5 install -y \
   libwayland-server \
@@ -50,6 +50,9 @@ echo "::group:: Enable DMS user service for all users"
 install -d /etc/systemd/user/default.target.wants /etc/systemd/user/niri.service.wants
 systemctl --global enable dms.service
 systemctl --global add-wants niri.service dms.service
+
+# Set graphical target as default
+systemctl set-default graphical.target
 
 echo "DMS user service enabled for all users"
 echo "::endgroup::"
