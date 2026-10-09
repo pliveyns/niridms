@@ -42,7 +42,8 @@ dnf5 install -y \
   rsms-inter-fonts \
   rsms-inter-vf-fonts \
   xdg-desktop-portal-gnome \
-  xdg-desktop-portal-gtk
+  xdg-desktop-portal-gtk \
+  cava
 
 echo "Niri desktop installed successfully"
 echo "::endgroup::"
@@ -53,9 +54,6 @@ echo "::group:: Enable DMS user service for all users"
 install -d /etc/systemd/user/default.target.wants /etc/systemd/user/niri.service.wants
 systemctl --global enable dms.service
 systemctl --global add-wants niri.service dms.service
-
-# Set graphical target as default
-systemctl set-default graphical.target
 
 echo "DMS user service enabled for all users"
 echo "::endgroup::"
@@ -82,6 +80,9 @@ EOF
 
 systemctl disable gdm.service lightdm.service sddm.service || true
 systemctl enable greetd.service
+
+# Set graphical target as default
+systemctl set-default graphical.target
 
 echo "greetd configured for dms-greeter"
 echo "::endgroup::"
