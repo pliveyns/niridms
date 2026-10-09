@@ -15,6 +15,10 @@ shopt -s nullglob
 echo "::group:: Install Niri Desktop with DMS"
 
 # Install Niri and DMS and recommended extras.
+
+copr_install_isolated "avengemedia/danklinux" \
+  quickshell-git
+
 copr_install_isolated "avengemedia/dms" \
   dms niri
 
