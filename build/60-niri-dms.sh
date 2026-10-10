@@ -15,7 +15,11 @@ shopt -s nullglob
 echo "::group:: Install Niri Desktop with DMS"
 
 # Install Niri and DMS and recommended extras.
+
 copr_install_isolated "avengemedia/danklinux" \
+  quickshell-git
+
+copr_install_isolated "avengemedia/dms" \
   dms niri
 
 copr_install_isolated "avengemedia/danklinux" \
@@ -23,8 +27,7 @@ copr_install_isolated "avengemedia/danklinux" \
   dgop \
   danksearch \
   dms-greeter \
-  matugen \
-  quickshell
+  matugen
 
 dnf5 install -y \
   libwayland-server \
@@ -39,7 +42,8 @@ dnf5 install -y \
   rsms-inter-fonts \
   rsms-inter-vf-fonts \
   xdg-desktop-portal-gnome \
-  xdg-desktop-portal-gtk
+  xdg-desktop-portal-gtk \
+  cava
 
 echo "Niri desktop installed successfully"
 echo "::endgroup::"
@@ -76,6 +80,9 @@ EOF
 
 systemctl disable gdm.service lightdm.service sddm.service || true
 systemctl enable greetd.service
+
+# Set graphical target as default
+systemctl set-default graphical.target
 
 echo "greetd configured for dms-greeter"
 echo "::endgroup::"

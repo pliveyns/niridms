@@ -50,7 +50,7 @@ COPY --from=brew /system_files /oci/brew
 
 # Base Image - GNOME included (Fedora official OSTree desktop)
 # Renovate will keep the digest pin up to date.
-FROM quay.io/fedora-ostree-desktops/base-atomic:44@sha256:63ac0deddeb8737fd9054b70f70536eece49f524c0d15c729fc966301a1a5784
+FROM quay.io/fedora-ostree-desktops/base-atomic:44@sha256:d95b55099aae5ff51ccbcabfd9c10cf51d1a2142d55340b9368847ece9de516d
 
 # Image identity - these define how bootc, fastfetch, and the ublue ecosystem
 # recognize your image. Change these to match your project name.
@@ -104,6 +104,14 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/boot \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build/20-packages-and-services.sh
+
+## Install some Applications.
+RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
+    --mount=type=cache,dst=/var/cache/libdnf5 \
+    --mount=type=cache,dst=/var/cache/rpm-ostree \
+    --mount=type=tmpfs,dst=/boot \
+    --mount=type=tmpfs,dst=/tmp \
+    /ctx/build/30-applications.sh
 
 ## Installs the Niri desktop with Dank Material Sheel (DMS).
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
